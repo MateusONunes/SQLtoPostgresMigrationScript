@@ -42,9 +42,8 @@ select cast('create table ' + TABLE_SCHEMA + '.' + table_name + char(13) + '(' +
 								then ' smallint' + iif(COLUMN_DEFAULT is not null, ' Default ' + replace(replace(COLUMN_DEFAULT, '((', ''), '))', ''), '')
 							when DATA_TYPE = 'date'
 								then ' date'
-							when DATA_TYPE = 'datetime'
-								or DATA_TYPE = 'datetime2'
-								then ' timestamptz'
+              when DATA_TYPE in ('datetime', 'smalldatetime', 'datetime2')
+								then ' timestamp'
 							when DATA_TYPE = 'uniqueidentifier'
 								then ' UUID'
 							when DATA_TYPE in (

@@ -80,3 +80,10 @@ end
 ---- To update the currently configured value for this feature.  
 --RECONFIGURE;  
 --GO  
+
+
+----Linux
+----xp_cmdshell not work in linux. Alternative to generator sqlcmd to terminal commands:
+--select 'sqlcmd -U SA -P ''PASS_WORD_SQLSERVER'' -S localhost -d nucleo -Q "set nocount on; select * from nucleo.dbo.' + t.table_name + '" -o "' + t.table_name + '.csv" -s"$|" -w 700' cmd
+--from  INFORMATION_SCHEMA.TABLES t
+

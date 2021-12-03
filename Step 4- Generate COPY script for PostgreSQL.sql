@@ -11,3 +11,15 @@ where col3 not in (
 
 drop table tempQueries
 drop table tempQueriesCopy
+
+--Alternative for linux:
+--Copy script
+select 'Copy ' + SCHEMA_NAME(schema_id) + '.' + t.name + 'From ' + char(39) + 'c:\data' + t.name + '.csv' + char(39) + ' DELIMITER ' + char(39) + '~' + char(39) + ' null as ' + char(39) + 'null' + char(39) + '  encoding ' + char(39) + 'windows-1251' + char(39) + ' CSV;' + char(13) + 'select 1;' + char(13)
+from sys.tables t
+where SCHEMA_NAME(schema_id) not in (
+		select TABLE_SCHEMA + '.' + char(34) + TABLE_NAME + char(34)
+		from INFORMATION_SCHEMA.COLUMNS
+		where DATA_TYPE = 'varbinary'
+		)
+  and t.name  = ''
+
